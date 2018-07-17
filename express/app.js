@@ -31,7 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-
 var reportData = []
 
 var savedFile = {
@@ -42,8 +41,8 @@ var savedFile = {
 
 var sentData = {
   //live
-  nameL: 'Momofuku',
-  reviewsL: reportData, //
+  nameL: '',
+  reviewsL: reportData,
   organizedConceptsL: parse.conceptAggregator(reportData),
   monthConceptsL: parse.datedAggregator(parse.parseReviewsByDate(reportData)),
   //hardcoded
@@ -59,11 +58,8 @@ app.get('/1', (req, res) => {
 })
 
 app.post('/1', (req, res) => {
-  // console.log('full request', req)
-  // console.log('req body', req.body)
   sentData.nameL = req.body.name
   const sendStuff = (data) =>{
-    // console.log('data added to object', JSON.stringify(data))
     data.forEach(function(review, i) {
       // review.id = i
       reportData.push(review)
@@ -73,16 +69,14 @@ app.post('/1', (req, res) => {
     mc = parse.datedAggregator(parse.parseReviewsByDate(reportData))
     sentData.organizedConceptsL = oc
     sentData.monthConceptsL = mc
-    savedFile = {
-      reviews: reportData,
-      organizedConcepts: oc,
-      monthConcepts: mc
-    }
+    // savedFile = {
+    //   reviews: reportData,
+    //   organizedConcepts: oc,
+    //   monthConcepts: mc
+    // }
     // console.log('savedFile added to object', JSON.stringify(savedFile))
 
-    // console.log('liveData', sentData.monthConceptsL)
-
-    fs.writeFileSync(`./results/output.json`, JSON.stringify(savedFile))
+    // fs.writeFileSync(`./results/output.json`, JSON.stringify(savedFile))
     // fs.writeFileSync(`report.json`, JSON.stringify(reportData))
     // fs.writeFileSync(`oconcepts.json`, JSON.stringify(oc))
     // fs.writeFileSync(`mconcepts.json`, JSON.stringify(mc))
@@ -99,8 +93,7 @@ app.post('/1', (req, res) => {
     // console.log('url1 triggered')
     controller.getData(req.body.url1, sendStuff)
   }
-
-  // if (req.body.url3 != '') {
+  // else if (req.body.url3 != '') {
   //   console.log('url3 triggered')    
   //   var data3 = sentiment.getData(req.body.url3, sendStuff)
   // }
