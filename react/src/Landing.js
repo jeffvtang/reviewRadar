@@ -1,19 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "@reach/router";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 import "typeface-roboto";
 import { withStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import PropTypes from "prop-types";
 import LandingContainer from "./landingPartials/_containers";
 import radar from "./landingPartials/radar.png";
-import bg from "./full background.png";
 
 import Button from "@material-ui/core/Button"; // used to reroute to Registration + Login
 
